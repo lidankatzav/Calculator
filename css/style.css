@@ -6,6 +6,8 @@
   grid-template-rows: repeat(7, 1fr);
   height: 70%;
   width: 70%;
+  border: 1px solid black;
+  border-radius: 3px;
 }
 
 .Calculator > button {
@@ -40,8 +42,46 @@
   background-color: #94cefe;
 }
 
+body.dark > .Calculator > button {
+  background-color: lightslategray;
+}
+
+.dark > .Calculator > #seven,
+.dark > .Calculator > #eight,
+.dark > .Calculator > #nine,
+.dark > .Calculator > #four,
+.dark > .Calculator > #five,
+.dark > .Calculator > #six,
+.dark > .Calculator > #seven,
+.dark > .Calculator > #one,
+.dark > .Calculator > #two,
+.dark > .Calculator > #three,
+.dark > .Calculator > #zero,
+.dark > .Calculator > #POINT {
+  background-color: orange;
+}
+
+.Calculator > button:hover {
+  border: 3px solid white;
+  color: white;
+}
+
+.Calculator > button:active {
+  border: 3px solid yellow;
+  color: yellow;
+}
+
+#title:hover,
+#title:active,
+#empty:hover,
+#empty:active {
+  color: black;
+  border: 1px solid black;
+}
+
 #result {
   background-color: lightyellow;
+  border: 4px solid black;
 }
 
 #api > img {
