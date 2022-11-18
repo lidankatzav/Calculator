@@ -8,155 +8,53 @@
       href="https://cdn2.iconfinder.com/data/icons/ios7-inspired-mac-icon-set/512/Calculator_512.png"
     />
     <link rel="stylesheet" href="../css/style.css" />
-    <script>
-      function displayButtonInfo(value) {
-        alert(value);
-      }
-    </script>
   </head>
   <body class="light">
     <div class="Calculator">
-      <button
-        type="button"
-        id="info"
-        onclick="alert('Developer: Lidan Katzav \nCalculator’s Version: v1.0 \nDescription: Simple scientific calculator built using HTML, CSS & JS.')"
-      >
+      <button type="button" id="info">
         <img src="../photos/info.svg" />
       </button>
       <button type="button" id="title">My Calculator</button>
-      <button
-        type="button"
-        id="settings"
-        onclick="displayButtonInfo('settings')"
-      >
+      <button type="button" id="settings">
         <img src="../photos/settings.svg" />
       </button>
-      <button type="button" id="light" onclick="displayButtonInfo('light')">
+      <button type="button" id="light">
         <img src="../photos/light.svg" />
       </button>
-      <button
-        type="button"
-        id="result"
-        onclick="displayButtonInfo('result')"
-      ></button>
-      <button type="button" id="erase" onclick="displayButtonInfo('erase')">
+      <button type="button" id="result"></button>
+      <button type="button" id="erase">
         <img src="../photos/back.svg" />
       </button>
-      <button type="button" id="history" onclick="displayButtonInfo('history')">
+      <button type="button" id="history">
         <img src="../photos/history.svg" />
       </button>
-      <button type="button" id="reset" onclick="displayButtonInfo('reset')">
-        C
-      </button>
-      <button type="button" id="diff" onclick="displayButtonInfo('diff')">
-        /
-      </button>
-      <button
-        type="button"
-        id="scientific"
-        onclick="displayButtonInfo('scientific')"
-      >
+      <button type="button" id="reset">C</button>
+      <button type="button" id="diff" class="operators">/</button>
+      <button type="button" id="scientific">
         <img src="../photos/nthRoot.svg" />
       </button>
-      <button
-        type="button"
-        id="seven"
-        class="digits"
-        onclick="displayButtonInfo(7)"
-      >
-        7
-      </button>
-      <button
-        type="button"
-        id="eight"
-        class="digits"
-        onclick="displayButtonInfo(8)"
-      >
-        8
-      </button>
-      <button
-        type="button"
-        id="nine"
-        class="digits"
-        onclick="displayButtonInfo(9)"
-      >
-        9
-      </button>
-      <button type="button" id="mul" onclick="displayButtonInfo('*')">*</button>
-      <button type="button" id="api" onclick="displayButtonInfo('api')">
+      <button type="button" id="seven" class="digits">7</button>
+      <button type="button" id="eight" class="digits">8</button>
+      <button type="button" id="nine" class="digits">9</button>
+      <button type="button" id="mul" class="operators">*</button>
+      <button type="button" id="api">
         <img src="../photos/cloud.png" />
       </button>
-      <button
-        type="button"
-        id="four"
-        class="digits"
-        onclick="displayButtonInfo(4)"
-      >
-        4
-      </button>
-      <button
-        type="button"
-        id="five"
-        class="digits"
-        onclick="displayButtonInfo(5)"
-      >
-        5
-      </button>
-      <button
-        type="button"
-        id="six"
-        class="digits"
-        onclick="displayButtonInfo(6)"
-      >
-        6
-      </button>
-      <button type="button" id="sub" onclick="displayButtonInfo('-')">-</button>
+      <button type="button" id="four" class="digits">4</button>
+      <button type="button" id="five" class="digits">5</button>
+      <button type="button" id="six" class="digits">6</button>
+      <button type="button" id="sub" class="operators">-</button>
       <button type="button" id="empty"></button>
-      <button
-        type="button"
-        id="one"
-        class="digits"
-        onclick="displayButtonInfo(1)"
-      >
-        1
-      </button>
-      <button
-        type="button"
-        id="two"
-        class="digits"
-        onclick="displayButtonInfo(2)"
-      >
-        2
-      </button>
-      <button
-        type="button"
-        id="three"
-        class="digits"
-        onclick="displayButtonInfo(3)"
-      >
-        3
-      </button>
-      <button type="button" id="add" onclick="displayButtonInfo('+')">+</button>
-      <button type="button" id="pm" onclick="displayButtonInfo('±')">±</button>
-      <button
-        type="button"
-        id="zero"
-        class="digits"
-        onclick="displayButtonInfo(0)"
-      >
-        0
-      </button>
-      <button
-        type="button"
-        id="point"
-        class="digits"
-        onclick="displayButtonInfo('.')"
-      >
-        .
-      </button>
-      <button type="button" id="eval" onclick="displayButtonInfo('=')">
-        =
-      </button>
+      <button type="button" id="one" class="digits">1</button>
+      <button type="button" id="two" class="digits">2</button>
+      <button type="button" id="three" class="digits">3</button>
+      <button type="button" id="add" class="operators">+</button>
+      <button type="button" id="pm">±</button>
+      <button type="button" id="zero" class="digits">0</button>
+      <button type="button" id="point">.</button>
+      <button type="button" id="eval">=</button>
     </div>
+    <script src="../js/calculator.js"></script>
+    <script src="../js/application.js"></script>
   </body>
 </html>

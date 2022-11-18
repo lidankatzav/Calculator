@@ -1,13 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,900&family=Open+Sans:wght@300;700&family=Poor+Story&display=swap");
 
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .Calculator {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(7, 1fr);
-  height: 70%;
-  width: 70%;
+  height: 400px;
+  width: 500px;
   border: 1px solid black;
   border-radius: 3px;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
 }
 
 .Calculator > button {
@@ -79,9 +88,12 @@ body.dark > .Calculator > button {
   border: 1px solid black;
 }
 
-#result {
+#result,
+#result:hover,
+#result:active {
   background-color: lightyellow;
   border: 4px solid black;
+  color: black;
 }
 
 #api > img {
