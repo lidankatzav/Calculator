@@ -28,73 +28,95 @@ function eval(operand_1, operator, operand_2) {
 
 function active_button(value) {
   if (value in document.querySelectorAll(".digits")) {
-    if (operator === "") {
-      operand_1 += value;
-      result = operand_1;
-    } else {
-      operand_2 += value;
-      result = operand_1 + " " + operator + " " + operand_2;
-    }
+    add_digits(value);
+  } else if (value === "=") {
+    calculate();
+  } else if (value === "C") {
+    reset();
+  } else if (value === "erase") {
+    erase();
+  } else if (value === ".") {
+    add_point();
+  } else if (value === "pm") {
+    plus_minus();
   } else {
-    if (value === "=") {
-      result = eval(parseFloat(operand_1), operator, parseFloat(operand_2));
-      operand_1 = result;
-      operand_2 = "";
-      operator = "";
-    } else if (value === "C") {
-      operand_1 = "";
-      operand_2 = "";
-      operator = "";
-      result = "";
-    } else if (value === "erase") {
-      if (operand_2 === "" && operator === "") {
-        operand_1 = operand_1.slice(0, -1);
-        result = operand_1;
-      } else if (operand_2 === "") {
-        operator = "";
-        result = operand_1;
-      } else {
-        operand_2 = operand_2.slice(0, -1);
-        result = operand_1 + " " + operator + " " + operand_2;
-      }
-    } else if (value === ".") {
-      if (operand_2 === "") {
-        operand_1 += ".";
-        result = operand_1;
-      } else {
-        operand_2 += ".";
-        result = operand_1 + " " + operator + " " + operand_2;
-      }
-    } else if (value === "pm") {
-      if (operand_2 === "") {
-        if (operand_1[0] === "-") {
-          operand_1 = operand_1.slice(1);
-        } else {
-          operand_1 = "-" + operand_1;
-        }
-        result = operand_1;
-      } else {
-        if (operand_2[0] === "-") {
-          operand_2 = operand_2.slice(1);
-        } else {
-          operand_2 = "-" + operand_2;
-        }
-        result = operand_1 + " " + operator + " " + operand_2;
-      }
-    } else {
-      if (operand_1 !== "" && operand_2 !== "") {
-        operand_1 = eval(
-          parseFloat(operand_1),
-          operator,
-          parseFloat(operand_2)
-        );
-        operand_2 = "";
-      }
-      operator = value;
-      result = operand_1 + " " + operator;
-    }
+    add_operator(value);
   }
   document.getElementById("result").innerText = result;
+}
+
+function add_digits(value) {
+  if (operator === "") {
+    operand_1 += value;
+    result = operand_1;
+  } else {
+    operand_2 += value;
+    result = operand_1 + " " + operator + " " + operand_2;
+  }
+}
+
+function add_operator(value) {
+  if (operand_1 !== "" && operand_2 !== "") {
+    operand_1 = eval(parseFloat(operand_1), operator, parseFloat(operand_2));
+    operand_2 = "";
+  }
+  operator = value;
+  result = operand_1 + " " + operator;
+}
+
+function calculate() {
+  result = eval(parseFloat(operand_1), operator, parseFloat(operand_2));
+  operand_1 = result;
+  operand_2 = "";
+  operator = "";
+}
+
+function reset() {
+  operand_1 = "";
+  operand_2 = "";
+  operator = "";
+  result = "";
+}
+
+function add_point() {
+  if (operand_2 === "") {
+    operand_1 += ".";
+    result = operand_1;
+  } else {
+    operand_2 += ".";
+    result = operand_1 + " " + operator + " " + operand_2;
+  }
+}
+
+function plus_minus() {
+  if (operand_2 === "") {
+    if (operand_1[0] === "-") {
+      operand_1 = operand_1.slice(1);
+    } else {
+      operand_1 = "-" + operand_1;
+    }
+    result = operand_1;
+  } else {
+    if (operand_2[0] === "-") {
+      operand_2 = operand_2.slice(1);
+    } else {
+      operand_2 = "-" + operand_2;
+    }
+    result = operand_1 + " " + operator + " " + operand_2;
+  }
+}
+
+function erase() {
+  if (operand_2 === "" && operator === "") {
+    operand_1 = operand_1.slice(0, -1);
+    result = operand_1;
+  } else if (operand_2 === "") {
+    operator = "";
+    result = operand_1;
+  } else {
+    operand_2 = operand_2.slice(0, -1);
+    result = operand_1 + " " + operator + " " + operand_2;
+  }
 }
 
 function add_listeners() {
