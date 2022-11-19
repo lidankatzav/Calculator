@@ -20,7 +20,7 @@ body {
 }
 
 .Calculator > button {
-  background-color: #70b3ff;
+  background-color: lightgrey;
   font-family: "Open Sans", sans-serif;
   font-size: 130%;
   font-weight: bold;
@@ -48,7 +48,7 @@ body {
 #three,
 #zero,
 #point {
-  background-color: #94cefe;
+  background-color: #94cefe7a;
 }
 
 body.dark > .Calculator > button {
