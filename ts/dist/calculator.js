@@ -1,30 +1,14 @@
 // Global vars
-var current_val = undefined;
-var operand_1 = "";
-var operator = "";
-var operand_2 = "";
+var calculation_lst = [];
 var result = "";
-function eval(operand_1, operator, operand_2) {
-    switch (operator) {
-        case "+":
-            current_val = operand_1 + operand_2;
-            break;
-        case "*":
-            current_val = operand_1 * operand_2;
-            break;
-        case "-":
-            current_val = operand_1 - operand_2;
-            break;
-        case "/":
-            current_val = operand_1 / operand_2;
-            break;
-        default:
-            current_val = operand_1;
-            break;
-    }
-    return current_val;
-}
-function active_button(value) {
+var operators = ["+", "-", "/", "*"];
+var is_eval = false;
+var mode = "simple";
+// let current_val = undefined;
+// let operand_1 = "";
+// let operator = "";
+// let operand_2 = "";
+function active_calculator_button(value) {
     if (value in document.querySelectorAll(".digits")) {
         add_digits(value);
     }
@@ -43,103 +27,103 @@ function active_button(value) {
     else if (value === "pm") {
         plus_minus();
     }
-    else {
+    else if (operators.includes(value)) {
         add_operator(value);
     }
     document.getElementById("result").innerText = result;
 }
+function join_lst(lst) {
+    var output = "";
+    for (var _i = 0, lst_1 = lst; _i < lst_1.length; _i++) {
+        var val = lst_1[_i];
+        output += val + " ";
+    }
+    return output;
+}
 function add_digits(value) {
-    if (operator === "") {
-        operand_1 += value;
-        result = operand_1;
+    var last_idx = calculation_lst.length - 1;
+    if (calculation_lst.length === 0 ||
+        operators.includes(calculation_lst[last_idx])) {
+        calculation_lst.push(value);
     }
     else {
-        operand_2 += value;
-        result = operand_1 + " " + operator + " " + operand_2;
+        calculation_lst[last_idx] += value;
     }
+    result = join_lst(calculation_lst);
 }
 function add_operator(value) {
-    if (operand_1 !== "" && operand_2 !== "") {
-        operand_1 = eval(parseFloat(operand_1), operator, parseFloat(operand_2));
-        operand_2 = "";
+    var last_idx = calculation_lst.length - 1;
+    if (calculation_lst.length === 0 ||
+        !operators.includes(calculation_lst[last_idx])) {
+        calculation_lst.push(value);
     }
-    operator = value;
-    result = operand_1 + " " + operator;
+    else {
+        calculation_lst[calculation_lst.length - 1] = value;
+    }
+    if (mode === "simple") {
+        if (calculation_lst.length > 3) {
+            var temp_result = String(eval(join_lst(calculation_lst.slice(0, -1))));
+            calculation_lst = [temp_result, value];
+            console.log("simple in add");
+        }
+    }
+    result = join_lst(calculation_lst);
 }
 function calculate() {
-    result = eval(parseFloat(operand_1), operator, parseFloat(operand_2));
-    operand_1 = result;
-    operand_2 = "";
-    operator = "";
+    result = eval(join_lst(calculation_lst));
+    calculation_lst = [String(result)];
+    is_eval = true;
 }
 function reset() {
-    operand_1 = "";
-    operand_2 = "";
-    operator = "";
+    calculation_lst = [];
     result = "";
 }
 function add_point() {
-    if (operand_2 === "") {
-        operand_1 += ".";
-        result = operand_1;
+    var last_idx = calculation_lst.length - 1;
+    if (!operators.includes(calculation_lst[last_idx]) &&
+        !calculation_lst[last_idx].includes(".")) {
+        calculation_lst[last_idx] += ".";
     }
-    else {
-        operand_2 += ".";
-        result = operand_1 + " " + operator + " " + operand_2;
-    }
+    result = join_lst(calculation_lst);
 }
 function plus_minus() {
-    if (operand_2 === "") {
-        if (operand_1[0] === "-") {
-            operand_1 = operand_1.slice(1);
+    var last_idx = calculation_lst.length - 1;
+    if (!operators.includes(calculation_lst[last_idx])) {
+        if (calculation_lst[last_idx][0] === "-") {
+            calculation_lst[last_idx] = calculation_lst[last_idx].slice(1);
         }
         else {
-            operand_1 = "-" + operand_1;
+            calculation_lst[last_idx] = "-" + calculation_lst[last_idx];
         }
-        result = operand_1;
     }
-    else {
-        if (operand_2[0] === "-") {
-            operand_2 = operand_2.slice(1);
+    if (calculation_lst.length >= 3) {
+        if (calculation_lst[last_idx - 1] === "-") {
+            calculation_lst[last_idx - 1] = "+";
+            calculation_lst[last_idx] = calculation_lst[last_idx].slice(1);
         }
-        else {
-            operand_2 = "-" + operand_2;
-        }
-        result = operand_1 + " " + operator + " " + operand_2;
     }
+    result = join_lst(calculation_lst);
 }
 function erase() {
-    if (operand_2 === "" && operator === "") {
-        operand_1 = operand_1.slice(0, -1);
-        result = operand_1;
-    }
-    else if (operand_2 === "") {
-        operator = "";
-        result = operand_1;
+    var last_idx = calculation_lst.length - 1;
+    if (calculation_lst[last_idx].length === 1 ||
+        (calculation_lst.length === 1 && is_eval)) {
+        calculation_lst.pop();
     }
     else {
-        operand_2 = operand_2.slice(0, -1);
-        result = operand_1 + " " + operator + " " + operand_2;
+        calculation_lst[last_idx] = calculation_lst[last_idx].slice(0, -1);
     }
+    result = join_lst(calculation_lst);
 }
-function add_listeners() {
-    var lst_by_text = document.querySelectorAll(".digits, .operators, #eval, #reset, #point");
-    var _loop_1 = function (i) {
-        lst_by_text[i].addEventListener("click", function () {
-            return active_button(lst_by_text[i].textContent);
-        });
-    };
-    for (var i = 0; i < lst_by_text.length; i++) {
-        _loop_1(i);
+function change_calc_mode() {
+    if (mode === "simple") {
+        mode = "scientific";
+        console.log("changed scirend");
     }
-    document
-        .getElementById("erase")
-        .addEventListener("click", function () { return active_button("erase"); });
-    document
-        .getElementById("pm")
-        .addEventListener("click", function () { return active_button("pm"); });
+    else {
+        mode = "simple";
+        console.log("changed simple");
+    }
+    calculation_lst = [];
+    result = "";
 }
-function main() {
-    add_listeners();
-}
-main();
