@@ -1,36 +1,34 @@
-function info_button() {
+/* function info_button(): void {
   let info_str =
     "Developer: Lidan Katzav \nCalculator’s Version: v1.0 \nDescription: Simple scientific calculator built using HTML, CSS & JS.";
   document
     .getElementById("info")
     .addEventListener("click", () => alert(info_str));
-}
+} */
 
-function change_background(e) {
-  if (document.body.className === "light") {
-    e.style.backgroundColor = "orange";
+function change_button_background(button: HTMLElement): void {
+  if (button.style.backgroundColor === "lightgrey") {
+    button.style.backgroundColor = "orange";
   } else {
-    e.style.backgroundColor = "lightgrey";
+    button.style.backgroundColor = "lightgrey";
   }
 }
 
-function light_button() {
-  if (document.body.className === "light") {
-    document.body.className = "dark";
-    document.body.style.backgroundColor = "darkgray";
+function light_button(): void {
+  const result_div: HTMLElement = document.getElementById("result");
+  if (result_div.style.backgroundColor === "lightyellow") {
+    result_div.style.backgroundColor = "yellow";
   } else {
-    document.body.className = "light";
-    document.body.style.backgroundColor = "white";
+    result_div.style.backgroundColor = "lightyellow";
   }
 }
 
 function add_listeners_2(): void {
-  const lst_by_id = document.querySelectorAll(
-    "#light, #history, #scientific, #api"
-  );
-  for (let i = 0; i < lst_by_id.length; i++) {
-    lst_by_id[i].addEventListener("click", () =>
-      change_background(lst_by_id[i])
+  const id_lst: string[] = ["light", "history", "scientific", "api"];
+  for (const button_id of id_lst) {
+    const button_el = document.getElementById(button_id);
+    button_el.addEventListener("click", () =>
+      change_button_background(button_el)
     );
   }
   document
@@ -39,7 +37,7 @@ function add_listeners_2(): void {
 }
 
 function main_2(): void {
-  info_button();
+  // info_button();
   add_listeners_2();
 }
 
