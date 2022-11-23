@@ -2,7 +2,6 @@
 let calculation_lst: string[] = [];
 let result: string = "";
 const operators: string[] = ["+", "-", "/", "*"];
-let is_eval: boolean = false;
 let mode: string = "simple";
 // let current_val = undefined;
 // let operand_1 = "";
@@ -74,7 +73,6 @@ function add_operator(value: string): void {
 function calculate(): void {
   result = eval(join_lst(calculation_lst));
   calculation_lst = [String(result)];
-  is_eval = true;
 }
 
 function reset(): void {
@@ -113,10 +111,7 @@ function plus_minus(): void {
 
 function erase(): void {
   const last_idx: number = calculation_lst.length - 1;
-  if (
-    calculation_lst[last_idx].length === 1 ||
-    (calculation_lst.length === 1 && is_eval)
-  ) {
+  if (calculation_lst[last_idx].length === 1) {
     calculation_lst.pop();
   } else {
     calculation_lst[last_idx] = calculation_lst[last_idx].slice(0, -1);
@@ -134,4 +129,5 @@ function change_calc_mode(): void {
   }
   calculation_lst = [];
   result = "";
+  document.getElementById("result").innerText = result;
 }

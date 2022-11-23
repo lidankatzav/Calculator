@@ -23,6 +23,24 @@ function light_button() {
         result_div.style.backgroundColor = "lightyellow";
     }
 }
+function history_mode() {
+    var history_panel = document.getElementById("history_panel");
+    if (history_panel.style.visibility === "hidden") {
+        history_panel.style.visibility = "visible";
+    }
+    else {
+        history_panel.style.visibility = "hidden";
+    }
+}
+function scientific_mode() {
+    var scientific_panel = document.getElementById("scientific_panel");
+    if (scientific_panel.style.visibility === "hidden") {
+        scientific_panel.style.visibility = "visible";
+    }
+    else {
+        scientific_panel.style.visibility = "hidden";
+    }
+}
 function add_listeners() {
     // calculator events
     var check_by_content = document.querySelectorAll(".digits, .operators, #eval, #reset, #point");
@@ -60,5 +78,13 @@ function add_listeners() {
     document
         .getElementById("light")
         .addEventListener("click", function () { return light_button(); });
+    document.getElementById("history_panel").style.visibility = "hidden";
+    document
+        .getElementById("history")
+        .addEventListener("click", function () { return history_mode(); });
+    document.getElementById("scientific_panel").style.visibility = "hidden";
+    document
+        .getElementById("scientific")
+        .addEventListener("click", function () { return scientific_mode(); });
 }
 document.addEventListener("DOMContentLoaded", function () { return add_listeners(); });

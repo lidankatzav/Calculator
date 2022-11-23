@@ -25,6 +25,25 @@ function light_button(): void {
   }
 }
 
+function history_mode(): void {
+  const history_panel: HTMLElement = document.getElementById("history_panel");
+  if (history_panel.style.visibility === "hidden") {
+    history_panel.style.visibility = "visible";
+  } else {
+    history_panel.style.visibility = "hidden";
+  }
+}
+
+function scientific_mode(): void {
+  const scientific_panel: HTMLElement =
+    document.getElementById("scientific_panel");
+  if (scientific_panel.style.visibility === "hidden") {
+    scientific_panel.style.visibility = "visible";
+  } else {
+    scientific_panel.style.visibility = "hidden";
+  }
+}
+
 function add_listeners(): void {
   // calculator events
   const check_by_content: NodeList = document.querySelectorAll(
@@ -58,6 +77,14 @@ function add_listeners(): void {
   document
     .getElementById("light")
     .addEventListener("click", () => light_button());
+  document.getElementById("history_panel").style.visibility = "hidden";
+  document
+    .getElementById("history")
+    .addEventListener("click", () => history_mode());
+  document.getElementById("scientific_panel").style.visibility = "hidden";
+  document
+    .getElementById("scientific")
+    .addEventListener("click", () => scientific_mode());
 }
 
 document.addEventListener("DOMContentLoaded", () => add_listeners());

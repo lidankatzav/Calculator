@@ -2,7 +2,6 @@
 var calculation_lst = [];
 var result = "";
 var operators = ["+", "-", "/", "*"];
-var is_eval = false;
 var mode = "simple";
 // let current_val = undefined;
 // let operand_1 = "";
@@ -72,7 +71,6 @@ function add_operator(value) {
 function calculate() {
     result = eval(join_lst(calculation_lst));
     calculation_lst = [String(result)];
-    is_eval = true;
 }
 function reset() {
     calculation_lst = [];
@@ -106,8 +104,7 @@ function plus_minus() {
 }
 function erase() {
     var last_idx = calculation_lst.length - 1;
-    if (calculation_lst[last_idx].length === 1 ||
-        (calculation_lst.length === 1 && is_eval)) {
+    if (calculation_lst[last_idx].length === 1) {
         calculation_lst.pop();
     }
     else {
@@ -126,4 +123,5 @@ function change_calc_mode() {
     }
     calculation_lst = [];
     result = "";
+    document.getElementById("result").innerText = result;
 }

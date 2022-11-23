@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Calculator Project</title>
+    <title>Calculator</title>
     <meta charset="UTF-8" />
     <link
       rel="icon"
@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../scss/style.css" />
   </head>
   <body class="light">
+    <div class="History" id="history_panel"></div>
     <div class="Calculator">
       <button type="button" id="info">
         <img src="../photos/info.svg" />
@@ -54,8 +55,7 @@
       <button type="button" id="point">.</button>
       <button type="button" id="eval">=</button>
     </div>
-    <div class="Scientific"></div>
-    <div class="History"></div>
+    <div class="Scientific" id="scientific_panel"></div>
     <script src="../ts/dist/application.js"></script>
     <script src="../ts/dist/calculator.js"></script>
   </body>
