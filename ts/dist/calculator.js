@@ -3,6 +3,7 @@ var calculation_lst = [];
 var result = "";
 var operators = ["+", "-", "/", "*"];
 var mode = "simple";
+var history_lst = [];
 // let current_val = undefined;
 // let operand_1 = "";
 // let operator = "";
@@ -68,8 +69,22 @@ function add_operator(value) {
     result = join_lst(calculation_lst);
 }
 function calculate() {
-    result = eval(join_lst(calculation_lst));
+    var expression = join_lst(calculation_lst);
+    result = eval(expression);
+    update_history(expression + "=" + String(result));
     calculation_lst = [String(result)];
+}
+function update_history(expression) {
+    history_lst.push(expression);
+    var history_div = document.getElementById("history_list");
+    history_div.innerHTML = "";
+    for (var _i = 0, _a = history_lst.reverse(); _i < _a.length; _i++) {
+        var val = _a[_i];
+        var new_line = document.createElement("p");
+        new_line.textContent = val;
+        new_line.style.textAlign = "center";
+        history_div.appendChild(new_line);
+    }
 }
 function reset() {
     calculation_lst = [];

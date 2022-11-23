@@ -42,33 +42,28 @@ function visible_or_hidden(elemnt_id: string): void {
   }
 }
 
-function get_values() {
-  console.log("hi");
-  const urlParams = new URLSearchParams(window.location.search);
-  const myParam = urlParams.get("font");
-  console.log(myParam);
-}
-
-function config() {
+function config(): void {
   if (window.location.search) {
-    const params = new URLSearchParams(window.location.search);
-    const background_color = params.get("color");
-    const font_family = params.get("font");
-    const mode = params.get("mode");
+    const params: URLSearchParams = new URLSearchParams(window.location.search);
+    const background_color: string = params.get("color");
+    const font_family: string = params.get("font");
+    const mode: string = params.get("mode");
     document.body.style.backgroundColor = background_color;
     document.body.style.fontFamily = font_family;
     const buttons_lst = document.querySelectorAll("button");
     for (let i = 0; i < buttons_lst.length; i++) {
       buttons_lst[i].style.fontFamily = font_family;
     }
-    document.body.className = mode;
-    const id_lst: string[] = ["light", "history", "scientific", "api"];
-    for (const button_id of id_lst) {
+    if (mode === "dark") {
+      document.body.className = mode;
+    }
+    const buttons_id_lst: string[] = ["light", "history", "scientific", "api"];
+    for (const button_id of buttons_id_lst) {
       const button_el: HTMLElement = document.getElementById(button_id);
-      if (mode === "light") {
-        button_el.style.backgroundColor = "lightgrey";
-      } else {
+      if (mode === "dark") {
         button_el.style.backgroundColor = "lightslategray";
+      } else {
+        button_el.style.backgroundColor = "lightgrey";
       }
     }
   }

@@ -3,6 +3,7 @@ let calculation_lst: string[] = [];
 let result: string = "";
 const operators: string[] = ["+", "-", "/", "*"];
 let mode: string = "simple";
+let history_lst: string[] = [];
 // let current_val = undefined;
 // let operand_1 = "";
 // let operator = "";
@@ -70,8 +71,22 @@ function add_operator(value: string): void {
 }
 
 function calculate(): void {
-  result = eval(join_lst(calculation_lst));
+  const expression: string = join_lst(calculation_lst);
+  result = eval(expression);
+  update_history(expression + "=" + String(result));
   calculation_lst = [String(result)];
+}
+
+function update_history(expression: string): void {
+  history_lst.push(expression);
+  const history_div: HTMLElement = document.getElementById("history_list");
+  history_div.innerHTML = "";
+  for (const val of history_lst.reverse()) {
+    const new_line: HTMLElement = document.createElement("p");
+    new_line.textContent = val;
+    new_line.style.textAlign = "center";
+    history_div.appendChild(new_line);
+  }
 }
 
 function reset(): void {

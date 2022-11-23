@@ -10,11 +10,12 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 70%;
-  height: 70%;
+  width: 600px;
+  height: 400px;
   display: grid;
   grid-template-columns: 1fr 2.5fr 1fr;
   grid-template-areas: "history calculator scientific";
+  font-family: "Lato", sans-serif;
 }
 
 .Calculator {
@@ -261,4 +262,23 @@ body {
   border: 1px solid black;
   border-radius: 2px;
   visibility: hidden;
+  display: grid;
+  grid-template-rows: 1fr 6fr;
+  grid-template-areas: "history_title history_list";
+  overflow: auto;
+
+  #history_title {
+    grid-area: "history_title";
+    border-bottom: 1px solid black;
+    width: 100%;
+    align-items: center;
+    text {
+      font-weight: bold;
+      font-size: 100%;
+    }
+  }
+
+  div {
+    grid-area: "history_list";
+  }
 }

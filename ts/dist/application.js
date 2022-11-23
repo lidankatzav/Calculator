@@ -42,12 +42,6 @@ function visible_or_hidden(elemnt_id) {
         el.style.visibility = "hidden";
     }
 }
-function get_values() {
-    console.log("hi");
-    var urlParams = new URLSearchParams(window.location.search);
-    var myParam = urlParams.get("font");
-    console.log(myParam);
-}
 function config() {
     if (window.location.search) {
         var params = new URLSearchParams(window.location.search);
@@ -60,16 +54,18 @@ function config() {
         for (var i = 0; i < buttons_lst.length; i++) {
             buttons_lst[i].style.fontFamily = font_family;
         }
-        document.body.className = mode;
-        var id_lst = ["light", "history", "scientific", "api"];
-        for (var _i = 0, id_lst_1 = id_lst; _i < id_lst_1.length; _i++) {
-            var button_id = id_lst_1[_i];
+        if (mode === "dark") {
+            document.body.className = mode;
+        }
+        var buttons_id_lst = ["light", "history", "scientific", "api"];
+        for (var _i = 0, buttons_id_lst_1 = buttons_id_lst; _i < buttons_id_lst_1.length; _i++) {
+            var button_id = buttons_id_lst_1[_i];
             var button_el = document.getElementById(button_id);
-            if (mode === "light") {
-                button_el.style.backgroundColor = "lightgrey";
+            if (mode === "dark") {
+                button_el.style.backgroundColor = "lightslategray";
             }
             else {
-                button_el.style.backgroundColor = "lightslategray";
+                button_el.style.backgroundColor = "lightgrey";
             }
         }
     }
@@ -102,8 +98,8 @@ function add_listeners() {
             return change_button_background(button_el);
         });
     };
-    for (var _i = 0, id_lst_2 = id_lst; _i < id_lst_2.length; _i++) {
-        var button_id = id_lst_2[_i];
+    for (var _i = 0, id_lst_1 = id_lst; _i < id_lst_1.length; _i++) {
+        var button_id = id_lst_1[_i];
         _loop_2(button_id);
     }
     document.getElementById("result").style.backgroundColor = "lightyellow";
