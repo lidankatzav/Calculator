@@ -112,6 +112,6 @@ function add_listeners(): void {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  add_listeners();
   config();
+  add_listeners();
 });

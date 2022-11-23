@@ -116,6 +116,6 @@ function add_listeners() {
         .addEventListener("click", function () { return visible_or_hidden("scientific_panel"); });
 }
 document.addEventListener("DOMContentLoaded", function () {
-    add_listeners();
     config();
+    add_listeners();
 });

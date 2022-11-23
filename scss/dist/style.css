@@ -9,10 +9,10 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
-  height: 400px;
+  width: 80%;
+  height: 80%;
   display: grid;
-  grid-template-columns: 1fr 2.5fr 1fr;
+  grid-template-columns: 1.5fr 2.5fr 1.5fr;
   grid-template-areas: "history calculator scientific";
   font-family: "Lato", sans-serif;
 }
@@ -197,6 +197,10 @@ body {
 .dark .Scientific {
   background-color: gray;
 }
+.dark .Scientific button,
+.dark .Scientific div {
+  background-color: gray;
+}
 .dark .History {
   background-color: gray;
 }
@@ -207,6 +211,76 @@ body {
   border: 1px solid black;
   border-radius: 2px;
   visibility: hidden;
+  overflow-y: auto;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+}
+.Scientific #scientific_title {
+  grid-row-start: 1;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  text-align: center;
+}
+.Scientific #scientific_title text {
+  font-size: 140%;
+  font-weight: bold;
+}
+.Scientific #power_2 {
+  grid-row-start: 4;
+  grid-column-start: 1;
+}
+.Scientific #root_2 {
+  grid-row-start: 4;
+  grid-column-start: 2;
+}
+.Scientific #power {
+  grid-row-start: 5;
+  grid-column-start: 1;
+}
+.Scientific #root {
+  grid-row-start: 5;
+  grid-column-start: 2;
+}
+.Scientific #mod {
+  grid-row-start: 6;
+  grid-column-start: 1;
+}
+.Scientific #pai {
+  grid-row-start: 6;
+  grid-column-start: 2;
+}
+.Scientific #base_2 {
+  grid-row-start: 7;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.Scientific #empty_scientific {
+  grid-row-start: 2;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.Scientific button,
+.Scientific div {
+  height: 100%;
+  width: 100%;
+  background-color: #04ffab;
+  border: 1px solid black;
+  border-radius: 1px;
+  font-size: 120%;
+}
+.Scientific button img,
+.Scientific div img {
+  height: 60%;
+  width: 35%;
+}
+.Scientific button:hover {
+  border: 3px solid white;
+}
+.Scientific button:active {
+  border: 3px solid yellow;
 }
 
 .History {
@@ -218,17 +292,21 @@ body {
   display: grid;
   grid-template-rows: 1fr 6fr;
   grid-template-areas: "history_title history_list";
-  overflow: auto;
+  align-content: center;
+  justify-content: center;
+  overflow-y: auto;
 }
 .History #history_title {
   grid-area: "history_title";
   border-bottom: 1px solid black;
-  width: 100%;
+  width: 250px;
   align-items: center;
+  text-align: center;
 }
 .History #history_title text {
   font-weight: bold;
-  font-size: 100%;
+  margin: auto;
+  font-size: 140%;
 }
 .History div {
   grid-area: "history_list";

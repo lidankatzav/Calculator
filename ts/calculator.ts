@@ -51,11 +51,17 @@ function add_digits(value: string): void {
 
 function add_operator(value: string): void {
   const last_idx: number = calculation_lst.length - 1;
-  if (
-    calculation_lst.length === 0 ||
-    !operators.includes(calculation_lst[last_idx])
-  ) {
+  if (!operators.includes(calculation_lst[last_idx])) {
+    if (calculation_lst[last_idx].length > 1) {
+      if (
+        calculation_lst[last_idx][calculation_lst[last_idx].length - 1] === "."
+      ) {
+        return;
+      }
+    }
     calculation_lst.push(value);
+  } else if (calculation_lst.length === 0) {
+    return;
   } else {
     calculation_lst[calculation_lst.length - 1] = value;
   }
@@ -64,6 +70,10 @@ function add_operator(value: string): void {
       const temp_result: string = String(
         eval(join_lst(calculation_lst.slice(0, -1)))
       );
+      history_lst.push(
+        join_lst(calculation_lst.slice(0, -1)) + " = " + temp_result
+      );
+      update_history();
       calculation_lst = [temp_result, value];
     }
   }
@@ -71,20 +81,23 @@ function add_operator(value: string): void {
 }
 
 function calculate(): void {
-  const expression: string = join_lst(calculation_lst);
-  result = eval(expression);
-  update_history(expression + "=" + String(result));
-  calculation_lst = [String(result)];
+  if (calculation_lst.length >= 3) {
+    const expression: string = join_lst(calculation_lst);
+    result = eval(expression);
+    history_lst.push(expression + " = " + String(result));
+    update_history();
+    calculation_lst = [String(result)];
+  }
 }
 
-function update_history(expression: string): void {
-  history_lst.push(expression);
+function update_history(): void {
   const history_div: HTMLElement = document.getElementById("history_list");
   history_div.innerHTML = "";
   for (const val of history_lst.reverse()) {
     const new_line: HTMLElement = document.createElement("p");
     new_line.textContent = val;
     new_line.style.textAlign = "center";
+    new_line.style.wordBreak = "break-all";
     history_div.appendChild(new_line);
   }
 }
@@ -92,6 +105,8 @@ function update_history(expression: string): void {
 function reset(): void {
   calculation_lst = [];
   result = "";
+  history_lst = [];
+  update_history();
 }
 
 function add_point(): void {
