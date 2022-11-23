@@ -8,9 +8,15 @@
       href="https://cdn2.iconfinder.com/data/icons/ios7-inspired-mac-icon-set/512/Calculator_512.png"
     />
   </head>
+  <style>
+    body {
+      text-align: center;
+      justify-content: center;
+    }
+  </style>
   <body>
-    <h2><u>User Config:</u></h2>
-    <form method="post" class=".config_from">
+    <h2>User Config</h2>
+    <form method="get" action="index.html">
       <label for="color">Choose a color:</label>
       <select name="color" id="color">
         <option value="white">White</option>
@@ -22,20 +28,21 @@
       <br /><br />
       <label for="font">Choose a font-family:</label>
       <select name="font" id="font">
-        <option value="Arial">Ariel</option>
-        <option value="Verdana">Verdana</option>
-        <option value="Courier New">Courier New</option>
-        <option value="Georgia">Georgia</option>
+        <option value="Lato">Lato</option>
+        <option value="Ariel">Ariel</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Open Sans">Open Sans</option>
         <option value="Times New Roman">Times New Roman</option>
       </select>
-      <p>Please select mode:</p>
-      <label for="dark">Dark</label>
-      <input type="radio" id="dark" name="mode" value="dark" />
+      <br /><br />
+      <text>Please select mode:</text>
       <label for="light">Light</label>
       <input type="radio" id="light" name="mode" value="light" />
+      <label for="dark">Dark</label>
+      <input type="radio" id="dark" name="mode" value="dark" />
       <br /><br />
       <button type="sumbit" id="sumbit">Sumbit</button>
+      <p id="log"></p>
     </form>
-    <script src="../ts/dist/application.js"></script>
   </body>
 </html>

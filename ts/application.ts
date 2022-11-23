@@ -9,10 +9,18 @@
 // let mode: string = "simple";
 
 function change_button_background(button: HTMLElement): void {
-  if (button.style.backgroundColor === "lightgrey") {
-    button.style.backgroundColor = "#FED8B1";
+  if (document.body.className === "light") {
+    if (button.style.backgroundColor === "lightgrey") {
+      button.style.backgroundColor = "#FED8B1";
+    } else {
+      button.style.backgroundColor = "lightgrey";
+    }
   } else {
-    button.style.backgroundColor = "lightgrey";
+    if (button.style.backgroundColor === "lightslategray") {
+      button.style.backgroundColor = "#FED8B1";
+    } else {
+      button.style.backgroundColor = "lightslategray";
+    }
   }
 }
 
@@ -41,6 +49,31 @@ function get_values() {
   console.log(myParam);
 }
 
+function config() {
+  if (window.location.search) {
+    const params = new URLSearchParams(window.location.search);
+    const background_color = params.get("color");
+    const font_family = params.get("font");
+    const mode = params.get("mode");
+    document.body.style.backgroundColor = background_color;
+    document.body.style.fontFamily = font_family;
+    const buttons_lst = document.querySelectorAll("button");
+    for (let i = 0; i < buttons_lst.length; i++) {
+      buttons_lst[i].style.fontFamily = font_family;
+    }
+    document.body.className = mode;
+    const id_lst: string[] = ["light", "history", "scientific", "api"];
+    for (const button_id of id_lst) {
+      const button_el: HTMLElement = document.getElementById(button_id);
+      if (mode === "light") {
+        button_el.style.backgroundColor = "lightgrey";
+      } else {
+        button_el.style.backgroundColor = "lightslategray";
+      }
+    }
+  }
+}
+
 function add_listeners(): void {
   // calculator events
   const check_by_content: NodeList = document.querySelectorAll(
@@ -65,7 +98,6 @@ function add_listeners(): void {
   const id_lst: string[] = ["light", "history", "scientific", "api"];
   for (const button_id of id_lst) {
     const button_el: HTMLElement = document.getElementById(button_id);
-    button_el.style.backgroundColor = "lightgrey";
     button_el.addEventListener("click", () =>
       change_button_background(button_el)
     );
@@ -82,9 +114,9 @@ function add_listeners(): void {
   document
     .getElementById("scientific")
     .addEventListener("click", () => visible_or_hidden("scientific_panel"));
-
-  const url = new URL("config.html");
-  console.log(url.searchParams.get("font"));
 }
 
-document.addEventListener("DOMContentLoaded", () => add_listeners());
+document.addEventListener("DOMContentLoaded", () => {
+  add_listeners();
+  config();
+});

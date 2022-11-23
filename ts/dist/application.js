@@ -7,11 +7,21 @@
 } */
 // let mode: string = "simple";
 function change_button_background(button) {
-    if (button.style.backgroundColor === "lightgrey") {
-        button.style.backgroundColor = "#FED8B1";
+    if (document.body.className === "light") {
+        if (button.style.backgroundColor === "lightgrey") {
+            button.style.backgroundColor = "#FED8B1";
+        }
+        else {
+            button.style.backgroundColor = "lightgrey";
+        }
     }
     else {
-        button.style.backgroundColor = "lightgrey";
+        if (button.style.backgroundColor === "lightslategray") {
+            button.style.backgroundColor = "#FED8B1";
+        }
+        else {
+            button.style.backgroundColor = "lightslategray";
+        }
     }
 }
 function light_button() {
@@ -38,6 +48,32 @@ function get_values() {
     var myParam = urlParams.get("font");
     console.log(myParam);
 }
+function config() {
+    if (window.location.search) {
+        var params = new URLSearchParams(window.location.search);
+        var background_color = params.get("color");
+        var font_family = params.get("font");
+        var mode = params.get("mode");
+        document.body.style.backgroundColor = background_color;
+        document.body.style.fontFamily = font_family;
+        var buttons_lst = document.querySelectorAll("button");
+        for (var i = 0; i < buttons_lst.length; i++) {
+            buttons_lst[i].style.fontFamily = font_family;
+        }
+        document.body.className = mode;
+        var id_lst = ["light", "history", "scientific", "api"];
+        for (var _i = 0, id_lst_1 = id_lst; _i < id_lst_1.length; _i++) {
+            var button_id = id_lst_1[_i];
+            var button_el = document.getElementById(button_id);
+            if (mode === "light") {
+                button_el.style.backgroundColor = "lightgrey";
+            }
+            else {
+                button_el.style.backgroundColor = "lightslategray";
+            }
+        }
+    }
+}
 function add_listeners() {
     // calculator events
     var check_by_content = document.querySelectorAll(".digits, .operators, #eval, #reset, #point");
@@ -62,13 +98,12 @@ function add_listeners() {
     var id_lst = ["light", "history", "scientific", "api"];
     var _loop_2 = function (button_id) {
         var button_el = document.getElementById(button_id);
-        button_el.style.backgroundColor = "lightgrey";
         button_el.addEventListener("click", function () {
             return change_button_background(button_el);
         });
     };
-    for (var _i = 0, id_lst_1 = id_lst; _i < id_lst_1.length; _i++) {
-        var button_id = id_lst_1[_i];
+    for (var _i = 0, id_lst_2 = id_lst; _i < id_lst_2.length; _i++) {
+        var button_id = id_lst_2[_i];
         _loop_2(button_id);
     }
     document.getElementById("result").style.backgroundColor = "lightyellow";
@@ -83,7 +118,8 @@ function add_listeners() {
     document
         .getElementById("scientific")
         .addEventListener("click", function () { return visible_or_hidden("scientific_panel"); });
-    var url = new URL("config.html");
-    console.log(url.searchParams.get("font"));
 }
-document.addEventListener("DOMContentLoaded", function () { return add_listeners(); });
+document.addEventListener("DOMContentLoaded", function () {
+    add_listeners();
+    config();
+});

@@ -26,11 +26,11 @@ body {
 }
 .Calculator button {
   background-color: lightgrey;
-  font-family: "Open Sans", sans-serif;
   font-size: 130%;
   font-weight: bold;
   border: 1px solid black;
   border-radius: 1px;
+  font-family: "Lato", sans-serif;
 }
 .Calculator button img {
   height: 60%;
@@ -48,7 +48,6 @@ body {
   background-color: rgba(148, 206, 254, 0.4784313725);
 }
 .Calculator #title {
-  font-family: "Lato", sans-serif;
   font-size: 170%;
 }
 .Calculator #reset {
@@ -188,11 +187,17 @@ body {
   grid-row-start: 7;
 }
 
-body.dark > .Calculator button {
+.dark .Calculator button {
   background-color: lightslategray;
 }
-body.dark > .Calculator .digits {
+.dark .Calculator .digits {
   background-color: orange;
+}
+.dark .Scientific {
+  background-color: gray;
+}
+.dark .History {
+  background-color: gray;
 }
 
 .Scientific {
