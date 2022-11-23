@@ -64,7 +64,6 @@ function add_operator(value: string): void {
         eval(join_lst(calculation_lst.slice(0, -1)))
       );
       calculation_lst = [temp_result, value];
-      console.log("simple in add");
     }
   }
   result = join_lst(calculation_lst);
@@ -111,6 +110,9 @@ function plus_minus(): void {
 
 function erase(): void {
   const last_idx: number = calculation_lst.length - 1;
+  if (calculation_lst.length === 0) {
+    return;
+  }
   if (calculation_lst[last_idx].length === 1) {
     calculation_lst.pop();
   } else {
@@ -122,10 +124,8 @@ function erase(): void {
 function change_calc_mode(): void {
   if (mode === "simple") {
     mode = "scientific";
-    console.log("changed scirend");
   } else {
     mode = "simple";
-    console.log("changed simple");
   }
   calculation_lst = [];
   result = "";

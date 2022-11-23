@@ -10,18 +10,16 @@
   </head>
   <body>
     <h2><u>User Config:</u></h2>
-    <form method="get">
+    <form method="post" class=".config_from">
       <label for="color">Choose a color:</label>
-
       <select name="color" id="color">
-        <option value="white">white</option>
-        <option value="black">black</option>
-        <option value="red">red</option>
-        <option value="blue">blue</option>
-        <option value="green">green</option>
+        <option value="white">White</option>
+        <option value="black">Black</option>
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
       </select>
-      <br />
-      <br />
+      <br /><br />
       <label for="font">Choose a font-family:</label>
       <select name="font" id="font">
         <option value="Arial">Ariel</option>
@@ -30,11 +28,14 @@
         <option value="Georgia">Georgia</option>
         <option value="Times New Roman">Times New Roman</option>
       </select>
-      <p>please select mode:</p>
-      <label for="dark">dark</label>
+      <p>Please select mode:</p>
+      <label for="dark">Dark</label>
       <input type="radio" id="dark" name="mode" value="dark" />
-      <label for="light">light</label>
+      <label for="light">Light</label>
       <input type="radio" id="light" name="mode" value="light" />
+      <br /><br />
+      <button type="sumbit" id="sumbit">Sumbit</button>
     </form>
+    <script src="../ts/dist/application.js"></script>
   </body>
 </html>

@@ -10,7 +10,7 @@
 
 function change_button_background(button: HTMLElement): void {
   if (button.style.backgroundColor === "lightgrey") {
-    button.style.backgroundColor = "orange";
+    button.style.backgroundColor = "#FED8B1";
   } else {
     button.style.backgroundColor = "lightgrey";
   }
@@ -25,23 +25,20 @@ function light_button(): void {
   }
 }
 
-function history_mode(): void {
-  const history_panel: HTMLElement = document.getElementById("history_panel");
-  if (history_panel.style.visibility === "hidden") {
-    history_panel.style.visibility = "visible";
+function visible_or_hidden(elemnt_id: string): void {
+  const el: HTMLElement = document.getElementById(elemnt_id);
+  if (el.style.visibility === "hidden") {
+    el.style.visibility = "visible";
   } else {
-    history_panel.style.visibility = "hidden";
+    el.style.visibility = "hidden";
   }
 }
 
-function scientific_mode(): void {
-  const scientific_panel: HTMLElement =
-    document.getElementById("scientific_panel");
-  if (scientific_panel.style.visibility === "hidden") {
-    scientific_panel.style.visibility = "visible";
-  } else {
-    scientific_panel.style.visibility = "hidden";
-  }
+function get_values() {
+  console.log("hi");
+  const urlParams = new URLSearchParams(window.location.search);
+  const myParam = urlParams.get("font");
+  console.log(myParam);
 }
 
 function add_listeners(): void {
@@ -80,11 +77,14 @@ function add_listeners(): void {
   document.getElementById("history_panel").style.visibility = "hidden";
   document
     .getElementById("history")
-    .addEventListener("click", () => history_mode());
+    .addEventListener("click", () => visible_or_hidden("history_panel"));
   document.getElementById("scientific_panel").style.visibility = "hidden";
   document
     .getElementById("scientific")
-    .addEventListener("click", () => scientific_mode());
+    .addEventListener("click", () => visible_or_hidden("scientific_panel"));
+
+  const url = new URL("config.html");
+  console.log(url.searchParams.get("font"));
 }
 
 document.addEventListener("DOMContentLoaded", () => add_listeners());

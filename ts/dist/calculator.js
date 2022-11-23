@@ -63,7 +63,6 @@ function add_operator(value) {
         if (calculation_lst.length > 3) {
             var temp_result = String(eval(join_lst(calculation_lst.slice(0, -1))));
             calculation_lst = [temp_result, value];
-            console.log("simple in add");
         }
     }
     result = join_lst(calculation_lst);
@@ -104,6 +103,9 @@ function plus_minus() {
 }
 function erase() {
     var last_idx = calculation_lst.length - 1;
+    if (calculation_lst.length === 0) {
+        return;
+    }
     if (calculation_lst[last_idx].length === 1) {
         calculation_lst.pop();
     }
@@ -115,11 +117,9 @@ function erase() {
 function change_calc_mode() {
     if (mode === "simple") {
         mode = "scientific";
-        console.log("changed scirend");
     }
     else {
         mode = "simple";
-        console.log("changed simple");
     }
     calculation_lst = [];
     result = "";

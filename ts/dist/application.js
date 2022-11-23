@@ -8,7 +8,7 @@
 // let mode: string = "simple";
 function change_button_background(button) {
     if (button.style.backgroundColor === "lightgrey") {
-        button.style.backgroundColor = "orange";
+        button.style.backgroundColor = "#FED8B1";
     }
     else {
         button.style.backgroundColor = "lightgrey";
@@ -23,23 +23,20 @@ function light_button() {
         result_div.style.backgroundColor = "lightyellow";
     }
 }
-function history_mode() {
-    var history_panel = document.getElementById("history_panel");
-    if (history_panel.style.visibility === "hidden") {
-        history_panel.style.visibility = "visible";
+function visible_or_hidden(elemnt_id) {
+    var el = document.getElementById(elemnt_id);
+    if (el.style.visibility === "hidden") {
+        el.style.visibility = "visible";
     }
     else {
-        history_panel.style.visibility = "hidden";
+        el.style.visibility = "hidden";
     }
 }
-function scientific_mode() {
-    var scientific_panel = document.getElementById("scientific_panel");
-    if (scientific_panel.style.visibility === "hidden") {
-        scientific_panel.style.visibility = "visible";
-    }
-    else {
-        scientific_panel.style.visibility = "hidden";
-    }
+function get_values() {
+    console.log("hi");
+    var urlParams = new URLSearchParams(window.location.search);
+    var myParam = urlParams.get("font");
+    console.log(myParam);
 }
 function add_listeners() {
     // calculator events
@@ -81,10 +78,12 @@ function add_listeners() {
     document.getElementById("history_panel").style.visibility = "hidden";
     document
         .getElementById("history")
-        .addEventListener("click", function () { return history_mode(); });
+        .addEventListener("click", function () { return visible_or_hidden("history_panel"); });
     document.getElementById("scientific_panel").style.visibility = "hidden";
     document
         .getElementById("scientific")
-        .addEventListener("click", function () { return scientific_mode(); });
+        .addEventListener("click", function () { return visible_or_hidden("scientific_panel"); });
+    var url = new URL("config.html");
+    console.log(url.searchParams.get("font"));
 }
 document.addEventListener("DOMContentLoaded", function () { return add_listeners(); });
