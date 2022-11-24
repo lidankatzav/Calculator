@@ -25,6 +25,7 @@ body {
   border: 1px solid black;
   border-radius: 4px;
   grid-area: "calculator";
+  overflow: auto;
 
   button {
     background-color: lightgrey;
@@ -41,13 +42,14 @@ body {
   }
 
   button:hover {
-    border: 3px solid white;
-    color: white;
+    border: 2px solid #007bff;
+    border-radius: 2px;
   }
 
   button:active {
-    border: 3px solid yellow;
-    color: yellow;
+    background-color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 2px;
   }
 
   .digits {
@@ -375,4 +377,17 @@ body {
   div {
     grid-area: "history_list";
   }
+}
+
+#popup {
+  width: 600px;
+  height: 400px;
+  background: gray;
+  box-sizing: border-box; /* for inside padding */
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  //transform: translate(-50%, -50%);
 }

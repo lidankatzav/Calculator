@@ -1,13 +1,3 @@
-/* function info_button(): void {
-  let info_str =
-    "Developer: Lidan Katzav \nCalculator’s Version: v1.0 \nDescription: Simple scientific calculator built using HTML, CSS & JS.";
-  document
-    .getElementById("info")
-    .addEventListener("click", () => alert(info_str));
-} */
-
-// let mode: string = "simple";
-
 function change_button_background(button: HTMLElement): void {
   if (document.body.className === "light") {
     if (button.style.backgroundColor === "lightgrey") {
@@ -113,6 +103,7 @@ function add_listeners(): void {
   document
     .getElementById("scientific")
     .addEventListener("click", () => visible_or_hidden("scientific_panel"));
+  document.getElementById("popup").style.visibility = "hidden";
 }
 
 document.addEventListener("DOMContentLoaded", () => {

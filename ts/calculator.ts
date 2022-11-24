@@ -12,10 +12,6 @@ const scientific_operators: string[] = [
 ];
 let mode: string = "simple";
 let history_lst: string[] = [];
-// let current_val = undefined;
-// let operand_1 = "";
-// let operator = "";
-// let operand_2 = "";
 
 function active_calculator_button(value: string): void {
   if (value in document.querySelectorAll(".digits")) {

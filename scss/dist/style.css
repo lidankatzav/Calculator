@@ -48,7 +48,7 @@ body {
   border-radius: 2px;
 }
 .Calculator .digits {
-  background-color: rgba(148, 206, 254, 0.4784313725);
+  background-color: #94cefe7a;
 }
 .Calculator #title {
   font-size: 170%;
@@ -209,7 +209,7 @@ body {
 
 .Scientific {
   grid-area: "scientific";
-  background-color: rgb(4, 255, 171);
+  background-color: #04ffab;
   border: 1px solid black;
   border-radius: 2px;
   visibility: hidden;
@@ -268,7 +268,7 @@ body {
 .Scientific div {
   height: 100%;
   width: 100%;
-  background-color: rgb(4, 255, 171);
+  background-color: #04ffab;
   border: 1px solid black;
   border-radius: 1px;
   font-size: 120%;
@@ -318,10 +318,11 @@ body {
   width: 600px;
   height: 400px;
   background: gray;
-  box-sizing: border-box; /* for inside padding */
+  box-sizing: border-box;
+  /* for inside padding */
   padding: 10px;
   position: absolute;
   top: 50%;
   left: 50%;
   display: block;
-}/*# sourceMappingURL=style.css.map */
+}
