@@ -1,7 +1,7 @@
 // Global vars
-let calculation_lst: string[] = [];
-let result: string = "";
-const operators: string[] = ["+", "-", "/", "*"];
+let calculation_lst: string[] = []; // Array that saves the expression that is going to be calculated in parts of a number and a operator
+let result: string = ""; // String representation of the result displayed to the screen
+const operators: string[] = ["+", "-", "/", "*"]; // Array that represents all the IDs of the simple operators
 const scientific_operators: string[] = [
   "**2",
   "**",
@@ -9,11 +9,14 @@ const scientific_operators: string[] = [
   "pai",
   "sqrt",
   "root",
-];
-let mode: string = "simple";
-let history_lst: string[] = [];
+]; // // Array that represents all the IDs of the scientific operators
+let mode: string = "simple"; // String representation of the calculator mode (simple / scientific)
+let history_lst: string[] = []; // History list of all the expressiones that calculated
+let remote: boolean = false;
 
 function active_calculator_button(value: string): void {
+  // Function that receives a representation of ID of a button
+  // in the calculator and activates the corresponding function according to the ID.
   if (value in document.querySelectorAll(".digits")) {
     add_digits(value);
   } else if (value === "=") {
@@ -31,11 +34,11 @@ function active_calculator_button(value: string): void {
   } else if (operators.includes(value)) {
     add_operator(value);
   }
-  console.log(calculation_lst);
   document.getElementById("result").innerText = result;
 }
 
 function join_lst(lst: string[]): string {
+  // Function that takes an array and join it into a string representation.
   let output: string = "";
   for (const val of lst) {
     output += val + " ";
@@ -190,4 +193,26 @@ function add_scientific_value(value: string): void {
     add_operator("**");
     add_digits("1/");
   }
+}
+
+const btn = document.getElementById("api");
+btn.addEventListener("click", () => remote_eval());
+
+function remote_eval() {
+  for (let i = 0; i < calculation_lst.length; i++) {
+    if (calculation_lst[i] == "**") {
+      calculation_lst[i] = "^";
+    }
+  }
+  const URL: string =
+    "https://api.mathjs.org/v4/?expr=" +
+    encodeURIComponent(join_lst(calculation_lst));
+  fetch(URL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      document.getElementById("result").innerHTML = data;
+    });
 }

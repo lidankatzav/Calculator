@@ -280,12 +280,11 @@
   background-color: rgb(4, 255, 171);
   border: 1px solid black;
   border-radius: 2px;
-  visibility: hidden;
   overflow-y: auto;
   align-items: center;
-  display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(7, 1fr);
+  display: grid;
 
   #scientific_title {
     grid-row-start: 1;
@@ -378,13 +377,12 @@
   background-color: lightgoldenrodyellow;
   border: 1px solid black;
   border-radius: 2px;
-  visibility: hidden;
-  display: grid;
   grid-template-rows: 1fr 6fr;
   grid-template-areas: "history_title history_list";
   align-content: center;
   justify-content: center;
   overflow-y: auto;
+  display: grid;
 
   #history_title {
     grid-area: "history_title";

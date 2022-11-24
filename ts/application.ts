@@ -26,9 +26,9 @@ function light_button(): void {
 function visible_or_hidden(elemnt_id: string): void {
   const el: HTMLElement = document.getElementById(elemnt_id);
   if (el.style.visibility === "hidden") {
-    el.style.visibility = "visible";
+    el.style.display = "visible";
   } else {
-    el.style.visibility = "hidden";
+    el.style.display = "hidden";
   }
 }
 
