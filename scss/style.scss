@@ -1,21 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,900&family=Open+Sans:wght@300;700&family=Poor+Story&display=swap");
 
-body {
-  height: 100vh;
-  width: 100vh;
-  margin: 0;
-  padding: 0;
-  margin: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  height: 80%;
-  display: grid;
-  grid-template-columns: 1.5fr 2.5fr 1.5fr;
-  grid-template-areas: "history calculator scientific";
-  font-family: "Lato", sans-serif;
+@media only screen and (min-width: 600px) {
+  body {
+    height: 100vh;
+    width: 100vh;
+    margin: 0;
+    padding: 0;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1.5fr 2.5fr 1.5fr;
+    grid-template-areas: "history calculator scientific";
+    font-family: "Lato", sans-serif;
+  }
 }
 
 .Calculator {
@@ -405,5 +407,49 @@ body {
 #info_text {
   p {
     font-size: 30%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    overflow: visible;
+    height: 100vh;
+  }
+
+  .Calculator {
+    grid-row-start: 1;
+    height: 70vh;
+    width: 100%;
+  }
+
+  .Scientific {
+    height: 70vh;
+    grid-row-start: 2;
+    width: 100%;
+
+    button > img {
+      height: 60%;
+      width: 15%;
+    }
+  }
+
+  .History {
+    grid-row-start: 3;
+    width: 100%;
+    height: 70vh;
+
+    #history_title {
+      width: 600px;
+      height: 80px;
+    }
+
+    #history_list {
+      overflow: visible;
+      p {
+        font-size: 130%;
+      }
+    }
   }
 }
