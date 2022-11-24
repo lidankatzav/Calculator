@@ -57,29 +57,27 @@ function config() {
         if (mode === "dark") {
             document.body.className = mode;
         }
-        var buttons_id_lst = ["light", "history", "scientific", "api"];
-        for (var _i = 0, buttons_id_lst_1 = buttons_id_lst; _i < buttons_id_lst_1.length; _i++) {
-            var button_id = buttons_id_lst_1[_i];
-            var button_el = document.getElementById(button_id);
-            if (mode === "dark") {
-                button_el.style.backgroundColor = "lightslategray";
-            }
-            else {
-                button_el.style.backgroundColor = "lightgrey";
-            }
-        }
     }
 }
 function add_listeners() {
     // calculator events
-    var check_by_content = document.querySelectorAll(".digits, .operators, #eval, #reset, #point");
+    var lst_by_content = document.querySelectorAll(".digits, .operators, #eval, #reset, #point");
     var _loop_1 = function (i) {
-        check_by_content[i].addEventListener("click", function () {
-            return active_calculator_button(check_by_content[i].textContent);
+        lst_by_content[i].addEventListener("click", function () {
+            return active_calculator_button(lst_by_content[i].textContent);
         });
     };
-    for (var i = 0; i < check_by_content.length; i++) {
+    for (var i = 0; i < lst_by_content.length; i++) {
         _loop_1(i);
+    }
+    var scientific_lst = document.querySelectorAll(".scientific_operators");
+    var _loop_2 = function (i) {
+        scientific_lst[i].addEventListener("click", function () {
+            return active_calculator_button(scientific_lst[i].value);
+        });
+    };
+    for (var i = 0; i < scientific_lst.length; i++) {
+        _loop_2(i);
     }
     document
         .getElementById("erase")
@@ -92,15 +90,21 @@ function add_listeners() {
     });
     // App events
     var id_lst = ["light", "history", "scientific", "api"];
-    var _loop_2 = function (button_id) {
+    var _loop_3 = function (button_id) {
         var button_el = document.getElementById(button_id);
+        if (document.body.className === "dark") {
+            button_el.style.backgroundColor = "lightslategray";
+        }
+        else {
+            button_el.style.backgroundColor = "lightgrey";
+        }
         button_el.addEventListener("click", function () {
             return change_button_background(button_el);
         });
     };
     for (var _i = 0, id_lst_1 = id_lst; _i < id_lst_1.length; _i++) {
         var button_id = id_lst_1[_i];
-        _loop_2(button_id);
+        _loop_3(button_id);
     }
     document.getElementById("result").style.backgroundColor = "lightyellow";
     document

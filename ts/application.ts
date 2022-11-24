@@ -57,26 +57,25 @@ function config(): void {
     if (mode === "dark") {
       document.body.className = mode;
     }
-    const buttons_id_lst: string[] = ["light", "history", "scientific", "api"];
-    for (const button_id of buttons_id_lst) {
-      const button_el: HTMLElement = document.getElementById(button_id);
-      if (mode === "dark") {
-        button_el.style.backgroundColor = "lightslategray";
-      } else {
-        button_el.style.backgroundColor = "lightgrey";
-      }
-    }
   }
 }
 
 function add_listeners(): void {
   // calculator events
-  const check_by_content: NodeList = document.querySelectorAll(
+  const lst_by_content: NodeList = document.querySelectorAll(
     ".digits, .operators, #eval, #reset, #point"
   );
-  for (let i = 0; i < check_by_content.length; i++) {
-    check_by_content[i].addEventListener("click", () =>
-      active_calculator_button(check_by_content[i].textContent)
+  for (let i = 0; i < lst_by_content.length; i++) {
+    lst_by_content[i].addEventListener("click", () =>
+      active_calculator_button(lst_by_content[i].textContent)
+    );
+  }
+  const scientific_lst: any = document.querySelectorAll(
+    ".scientific_operators"
+  );
+  for (let i = 0; i < scientific_lst.length; i++) {
+    scientific_lst[i].addEventListener("click", () =>
+      active_calculator_button(scientific_lst[i].value)
     );
   }
   document
@@ -93,6 +92,11 @@ function add_listeners(): void {
   const id_lst: string[] = ["light", "history", "scientific", "api"];
   for (const button_id of id_lst) {
     const button_el: HTMLElement = document.getElementById(button_id);
+    if (document.body.className === "dark") {
+      button_el.style.backgroundColor = "lightslategray";
+    } else {
+      button_el.style.backgroundColor = "lightgrey";
+    }
     button_el.addEventListener("click", () =>
       change_button_background(button_el)
     );

@@ -2,6 +2,14 @@
 var calculation_lst = [];
 var result = "";
 var operators = ["+", "-", "/", "*"];
+var scientific_operators = [
+    "**2",
+    "**",
+    "%",
+    "pai",
+    "sqrt",
+    "root",
+];
 var mode = "simple";
 var history_lst = [];
 // let current_val = undefined;
@@ -27,9 +35,13 @@ function active_calculator_button(value) {
     else if (value === "pm") {
         plus_minus();
     }
+    else if (scientific_operators.includes(value)) {
+        add_scientific_value(value);
+    }
     else if (operators.includes(value)) {
         add_operator(value);
     }
+    console.log(calculation_lst);
     document.getElementById("result").innerText = result;
 }
 function join_lst(lst) {
@@ -43,7 +55,8 @@ function join_lst(lst) {
 function add_digits(value) {
     var last_idx = calculation_lst.length - 1;
     if (calculation_lst.length === 0 ||
-        operators.includes(calculation_lst[last_idx])) {
+        operators.includes(calculation_lst[last_idx]) ||
+        scientific_operators.includes(calculation_lst[last_idx])) {
         calculation_lst.push(value);
     }
     else {
@@ -53,9 +66,12 @@ function add_digits(value) {
 }
 function add_operator(value) {
     var last_idx = calculation_lst.length - 1;
-    if (!operators.includes(calculation_lst[last_idx])) {
+    if (!operators.includes(calculation_lst[last_idx]) &&
+        !scientific_operators.includes(calculation_lst[last_idx])) {
         if (calculation_lst[last_idx].length > 1) {
-            if (calculation_lst[last_idx][calculation_lst[last_idx].length - 1] === ".") {
+            if (calculation_lst[last_idx][calculation_lst[last_idx].length - 1] ===
+                "." ||
+                calculation_lst[last_idx][calculation_lst[last_idx].length - 1] === "/") {
                 return;
             }
         }
@@ -153,4 +169,24 @@ function change_calc_mode() {
     calculation_lst = [];
     result = "";
     document.getElementById("result").innerText = result;
+}
+function add_scientific_value(value) {
+    if (value === "**" || value == "%") {
+        add_operator(value);
+    }
+    else if (value === "**2") {
+        add_operator("**");
+        add_digits("2");
+    }
+    else if (value === "pai") {
+        add_digits(String(Math.PI));
+    }
+    else if (value === "sqrt") {
+        add_operator("**");
+        add_digits("1/2");
+    }
+    else if (value === "root") {
+        add_operator("**");
+        add_digits("1/");
+    }
 }
