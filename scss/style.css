@@ -26,7 +26,8 @@ body {
   grid-area: "calculator";
   overflow: auto;
 }
-.Calculator button {
+.Calculator button,
+.Calculator div {
   background-color: lightgrey;
   font-size: 130%;
   font-weight: bold;
@@ -34,7 +35,8 @@ body {
   border-radius: 1px;
   font-family: "Lato", sans-serif;
 }
-.Calculator button img {
+.Calculator button img,
+.Calculator div img {
   height: 60%;
   width: 60%;
 }
@@ -50,8 +52,11 @@ body {
 .Calculator .digits {
   background-color: rgba(148, 206, 254, 0.4784313725);
 }
-.Calculator #title {
-  font-size: 170%;
+.Calculator #title > p {
+  font-size: 150%;
+  text-align: center;
+  align-self: center;
+  margin: 5%;
 }
 .Calculator #reset {
   font-size: 160%;
@@ -85,6 +90,10 @@ body {
 .Calculator #settings {
   grid-row-start: 1;
   grid-column-start: 5;
+}
+.Calculator #settings a {
+  height: 100%;
+  width: 100%;
 }
 .Calculator #light {
   grid-row-start: 2;
@@ -193,6 +202,15 @@ body {
 .dark .Calculator button {
   background-color: lightslategray;
 }
+.dark .Calculator button:hover {
+  border: 2px solid #007bff;
+  border-radius: 2px;
+}
+.dark .Calculator button:active {
+  background-color: #007bff;
+  border: 2px solid #007bff;
+  border-radius: 2px;
+}
 .dark .Calculator .digits {
   background-color: orange;
 }
@@ -223,11 +241,13 @@ body {
   grid-row-start: 1;
   grid-column-start: 1;
   grid-column-end: 3;
+  align-items: center;
   text-align: center;
 }
-.Scientific #scientific_title text {
-  font-size: 140%;
+.Scientific #scientific_title p {
+  font-size: 130%;
   font-weight: bold;
+  margin-top: 5%;
 }
 .Scientific #power_2 {
   grid-row-start: 4;
@@ -271,7 +291,7 @@ body {
   background-color: rgb(4, 255, 171);
   border: 1px solid black;
   border-radius: 1px;
-  font-size: 120%;
+  font-size: 140%;
 }
 .Scientific button img,
 .Scientific div img {
@@ -279,10 +299,13 @@ body {
   width: 35%;
 }
 .Scientific button:hover {
-  border: 3px solid white;
+  border: 2px solid #007bff;
+  border-radius: 2px;
 }
 .Scientific button:active {
-  border: 3px solid yellow;
+  background-color: #007bff;
+  border: 2px solid #007bff;
+  border-radius: 2px;
 }
 
 .History {
@@ -305,23 +328,15 @@ body {
   align-items: center;
   text-align: center;
 }
-.History #history_title text {
+.History #history_title p {
   font-weight: bold;
-  margin: auto;
-  font-size: 140%;
+  margin: 7.5%;
+  font-size: 150%;
 }
 .History div {
   grid-area: "history_list";
 }
 
-#popup {
-  width: 600px;
-  height: 400px;
-  background: gray;
-  box-sizing: border-box; /* for inside padding */
-  padding: 10px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: block;
+#info_text p {
+  font-size: 30%;
 }/*# sourceMappingURL=style.css.map */

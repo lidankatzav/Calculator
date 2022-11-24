@@ -110,7 +110,6 @@ function add_listeners() {
     document
         .getElementById("scientific")
         .addEventListener("click", function () { return visible_or_hidden("scientific_panel"); });
-    document.getElementById("popup").style.visibility = "hidden";
 }
 document.addEventListener("DOMContentLoaded", function () {
     config();

@@ -27,7 +27,8 @@ body {
   grid-area: "calculator";
   overflow: auto;
 
-  button {
+  button,
+  div {
     background-color: lightgrey;
     font-size: 130%;
     font-weight: bold;
@@ -56,9 +57,11 @@ body {
     background-color: #94cefe7a;
   }
 
-  #title {
-    //font-family: "Lato", sans-serif;
-    font-size: 170%;
+  #title > p {
+    font-size: 150%;
+    text-align: center;
+    align-self: center;
+    margin: 5%;
   }
 
   #reset {
@@ -99,6 +102,10 @@ body {
   #settings {
     grid-row-start: 1;
     grid-column-start: 5;
+    a {
+      height: 100%;
+      width: 100%;
+    }
   }
 
   #light {
@@ -234,6 +241,17 @@ body {
   .Calculator {
     button {
       background-color: lightslategray;
+
+      &:hover {
+        border: 2px solid #007bff;
+        border-radius: 2px;
+      }
+
+      &:active {
+        background-color: #007bff;
+        border: 2px solid #007bff;
+        border-radius: 2px;
+      }
     }
 
     .digits {
@@ -271,11 +289,13 @@ body {
     grid-row-start: 1;
     grid-column-start: 1;
     grid-column-end: 3;
+    align-items: center;
     text-align: center;
 
-    text {
-      font-size: 140%;
+    p {
+      font-size: 130%;
       font-weight: bold;
+      margin-top: 5%;
     }
   }
 
@@ -329,7 +349,7 @@ body {
     background-color: rgb(4, 255, 171);
     border: 1px solid black;
     border-radius: 1px;
-    font-size: 120%;
+    font-size: 140%;
 
     img {
       height: 60%;
@@ -339,11 +359,14 @@ body {
 
   button {
     &:hover {
-      border: 3px solid white;
+      border: 2px solid #007bff;
+      border-radius: 2px;
     }
 
     &:active {
-      border: 3px solid yellow;
+      background-color: #007bff;
+      border: 2px solid #007bff;
+      border-radius: 2px;
     }
   }
 }
@@ -367,10 +390,10 @@ body {
     width: 250px;
     align-items: center;
     text-align: center;
-    text {
+    p {
       font-weight: bold;
-      margin: auto;
-      font-size: 140%;
+      margin: 7.5%;
+      font-size: 150%;
     }
   }
 
@@ -379,15 +402,8 @@ body {
   }
 }
 
-#popup {
-  width: 600px;
-  height: 400px;
-  background: gray;
-  box-sizing: border-box; /* for inside padding */
-  padding: 10px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: block;
-  //transform: translate(-50%, -50%);
+#info_text {
+  p {
+    font-size: 30%;
+  }
 }

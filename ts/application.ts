@@ -103,7 +103,6 @@ function add_listeners(): void {
   document
     .getElementById("scientific")
     .addEventListener("click", () => visible_or_hidden("scientific_panel"));
-  document.getElementById("popup").style.visibility = "hidden";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
