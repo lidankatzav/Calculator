@@ -223,7 +223,7 @@ function remote_eval(): void {
     "https://api.mathjs.org/v4/?expr=" +
     encodeURIComponent(join_lst(calculation_lst));
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 2000);
+  const timeoutId = setTimeout(() => controller.abort(), 10);
   fetch(URL, { signal: controller.signal })
     .then(function (response) {
       return response.json();
@@ -234,13 +234,15 @@ function remote_eval(): void {
       calculation_lst = [data];
       result = data;
       document.getElementById("result").innerText = data;
-    });
-  /*.catch((err) => {
+    })
+    .catch((err) => {
       if (err.name === "AbortError") {
-        console.log("2 seconds passed\nSwitch to local mode!");
+        alert("2 seconds passed\nSwitch to local mode!");
+      } else {
+        alert(err.msg);
       }
     })
     .finally(() => {
       clearTimeout(timeoutId);
-    });*/
+    });
 }
