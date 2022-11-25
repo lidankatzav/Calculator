@@ -163,7 +163,7 @@ function erase() {
         calculation_lst.pop();
     }
     else {
-        calculation_lst[last_idx] = calculation_lst[last_idx].slice(0, -1);
+        calculation_lst[last_idx] = String(calculation_lst[last_idx]).slice(0, -1);
     }
     result = join_lst(calculation_lst);
 }
@@ -216,7 +216,9 @@ function remote_eval() {
     }
     var URL = "https://api.mathjs.org/v4/?expr=" +
         encodeURIComponent(join_lst(calculation_lst));
-    fetch(URL)
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function () { return controller.abort(); }, 2000);
+    fetch(URL, { signal: controller.signal })
         .then(function (response) {
         return response.json();
     })
@@ -227,4 +229,12 @@ function remote_eval() {
         result = data;
         document.getElementById("result").innerText = data;
     });
+    /*.catch((err) => {
+        if (err.name === "AbortError") {
+          console.log("2 seconds passed\nSwitch to local mode!");
+        }
+      })
+      .finally(() => {
+        clearTimeout(timeoutId);
+      });*/
 }
