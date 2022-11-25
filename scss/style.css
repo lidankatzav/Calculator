@@ -236,6 +236,7 @@
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(7, 1fr);
   display: grid;
+  visibility: hidden;
 }
 .Scientific #scientific_title {
   grid-row-start: 1;
@@ -319,6 +320,7 @@
   justify-content: center;
   overflow-y: auto;
   display: grid;
+  visibility: hidden;
 }
 .History #history_title {
   grid-area: "history_title";
