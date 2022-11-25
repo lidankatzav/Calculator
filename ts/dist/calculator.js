@@ -205,7 +205,6 @@ function change_remote_mode() {
     else {
         remote_mode = true;
     }
-    console.log(remote_mode);
 }
 function remote_eval() {
     var expression_for_history = join_lst(calculation_lst);
