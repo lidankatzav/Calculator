@@ -9,10 +9,10 @@ var scientific_operators = [
     "pai",
     "sqrt",
     "root",
-]; // // Array that represents all the IDs of the scientific operators
-var mode = "simple"; // String representation of the calculator mode (simple / scientific)
+]; // Array that represents all the IDs of the scientific operators
+var calc_mode = "simple"; // String representation of the calculator calc_mode (simple / scientific)
 var history_lst = []; // History list of all the expressiones that calculated
-var remote = false;
+var remote_mode = false; //
 function active_calculator_button(value) {
     // Function that receives a representation of ID of a button
     // in the calculator and activates the corresponding function according to the ID.
@@ -20,7 +20,15 @@ function active_calculator_button(value) {
         add_digits(value);
     }
     else if (value === "=") {
-        calculate();
+        if (calculation_lst.length >= 3) {
+            if (remote_mode) {
+                remote_eval();
+                result = calculation_lst[0];
+            }
+            else {
+                calculate();
+            }
+        }
     }
     else if (value === "C") {
         reset();
@@ -39,6 +47,9 @@ function active_calculator_button(value) {
     }
     else if (operators.includes(value)) {
         add_operator(value);
+    }
+    if (value === "=" && remote_mode) {
+        result = "";
     }
     document.getElementById("result").innerText = result;
 }
@@ -82,7 +93,7 @@ function add_operator(value) {
     else {
         calculation_lst[calculation_lst.length - 1] = value;
     }
-    if (mode === "simple") {
+    if (calc_mode === "simple") {
         if (calculation_lst.length > 3) {
             var temp_result = String(eval(join_lst(calculation_lst.slice(0, -1))));
             history_lst.push(join_lst(calculation_lst.slice(0, -1)) + " = " + temp_result);
@@ -93,13 +104,11 @@ function add_operator(value) {
     result = join_lst(calculation_lst);
 }
 function calculate() {
-    if (calculation_lst.length >= 3) {
-        var expression = join_lst(calculation_lst);
-        result = eval(expression);
-        history_lst.push(expression + " = " + String(result));
-        update_history();
-        calculation_lst = [String(result)];
-    }
+    var expression = join_lst(calculation_lst);
+    result = eval(expression);
+    history_lst.push(expression + " = " + String(result));
+    update_history();
+    calculation_lst = [String(result)];
 }
 function update_history() {
     var history_div = document.getElementById("history_list");
@@ -159,11 +168,11 @@ function erase() {
     result = join_lst(calculation_lst);
 }
 function change_calc_mode() {
-    if (mode === "simple") {
-        mode = "scientific";
+    if (calc_mode === "simple") {
+        calc_mode = "scientific";
     }
     else {
-        mode = "simple";
+        calc_mode = "simple";
     }
     calculation_lst = [];
     result = "";
@@ -189,9 +198,17 @@ function add_scientific_value(value) {
         add_digits("1/");
     }
 }
-var btn = document.getElementById("api");
-btn.addEventListener("click", function () { return remote_eval(); });
+function change_remote_mode() {
+    if (remote_mode) {
+        remote_mode = false;
+    }
+    else {
+        remote_mode = true;
+    }
+    console.log(remote_mode);
+}
 function remote_eval() {
+    var expression_for_history = join_lst(calculation_lst);
     for (var i = 0; i < calculation_lst.length; i++) {
         if (calculation_lst[i] == "**") {
             calculation_lst[i] = "^";
@@ -204,7 +221,10 @@ function remote_eval() {
         return response.json();
     })
         .then(function (data) {
-        console.log(data);
-        document.getElementById("result").innerHTML = data;
+        history_lst.push(expression_for_history + " = " + data);
+        update_history();
+        calculation_lst = [data];
+        result = data;
+        document.getElementById("result").innerText = data;
     });
 }

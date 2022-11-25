@@ -77,6 +77,9 @@ function add_listeners(): void {
   document.getElementById("scientific").addEventListener("click", () => {
     change_calc_mode();
   });
+  document
+    .getElementById("api")
+    .addEventListener("click", () => change_remote_mode());
 
   // App events
   const id_lst: string[] = ["light", "history", "scientific", "api"];

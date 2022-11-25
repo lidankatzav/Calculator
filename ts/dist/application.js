@@ -80,6 +80,9 @@ function add_listeners() {
     document.getElementById("scientific").addEventListener("click", function () {
         change_calc_mode();
     });
+    document
+        .getElementById("api")
+        .addEventListener("click", function () { return change_remote_mode(); });
     // App events
     var id_lst = ["light", "history", "scientific", "api"];
     var _loop_3 = function (button_id) {

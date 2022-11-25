@@ -9,10 +9,10 @@ const scientific_operators: string[] = [
   "pai",
   "sqrt",
   "root",
-]; // // Array that represents all the IDs of the scientific operators
-let mode: string = "simple"; // String representation of the calculator mode (simple / scientific)
+]; // Array that represents all the IDs of the scientific operators
+let calc_mode: string = "simple"; // String representation of the calculator calc_mode (simple / scientific)
 let history_lst: string[] = []; // History list of all the expressiones that calculated
-let remote: boolean = false;
+let remote_mode: boolean = false; //
 
 function active_calculator_button(value: string): void {
   // Function that receives a representation of ID of a button
@@ -20,7 +20,14 @@ function active_calculator_button(value: string): void {
   if (value in document.querySelectorAll(".digits")) {
     add_digits(value);
   } else if (value === "=") {
-    calculate();
+    if (calculation_lst.length >= 3) {
+      if (remote_mode) {
+        remote_eval();
+        result = calculation_lst[0];
+      } else {
+        calculate();
+      }
+    }
   } else if (value === "C") {
     reset();
   } else if (value === "erase") {
@@ -33,6 +40,9 @@ function active_calculator_button(value: string): void {
     add_scientific_value(value);
   } else if (operators.includes(value)) {
     add_operator(value);
+  }
+  if (value === "=" && remote_mode) {
+    result = "";
   }
   document.getElementById("result").innerText = result;
 }
@@ -81,7 +91,7 @@ function add_operator(value: string): void {
   } else {
     calculation_lst[calculation_lst.length - 1] = value;
   }
-  if (mode === "simple") {
+  if (calc_mode === "simple") {
     if (calculation_lst.length > 3) {
       const temp_result: string = String(
         eval(join_lst(calculation_lst.slice(0, -1)))
@@ -97,13 +107,11 @@ function add_operator(value: string): void {
 }
 
 function calculate(): void {
-  if (calculation_lst.length >= 3) {
-    const expression: string = join_lst(calculation_lst);
-    result = eval(expression);
-    history_lst.push(expression + " = " + String(result));
-    update_history();
-    calculation_lst = [String(result)];
-  }
+  const expression: string = join_lst(calculation_lst);
+  result = eval(expression);
+  history_lst.push(expression + " = " + String(result));
+  update_history();
+  calculation_lst = [String(result)];
 }
 
 function update_history(): void {
@@ -168,10 +176,10 @@ function erase(): void {
 }
 
 function change_calc_mode(): void {
-  if (mode === "simple") {
-    mode = "scientific";
+  if (calc_mode === "simple") {
+    calc_mode = "scientific";
   } else {
-    mode = "simple";
+    calc_mode = "simple";
   }
   calculation_lst = [];
   result = "";
@@ -195,10 +203,17 @@ function add_scientific_value(value: string): void {
   }
 }
 
-const btn = document.getElementById("api");
-btn.addEventListener("click", () => remote_eval());
+function change_remote_mode(): void {
+  if (remote_mode) {
+    remote_mode = false;
+  } else {
+    remote_mode = true;
+  }
+  console.log(remote_mode);
+}
 
-function remote_eval() {
+function remote_eval(): void {
+  const expression_for_history: string = join_lst(calculation_lst);
   for (let i = 0; i < calculation_lst.length; i++) {
     if (calculation_lst[i] == "**") {
       calculation_lst[i] = "^";
@@ -212,7 +227,10 @@ function remote_eval() {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
-      document.getElementById("result").innerHTML = data;
+      history_lst.push(expression_for_history + " = " + data);
+      update_history();
+      calculation_lst = [data];
+      result = data;
+      document.getElementById("result").innerText = data;
     });
 }

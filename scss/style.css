@@ -245,7 +245,7 @@
   text-align: center;
 }
 .Scientific #scientific_title p {
-  font-size: 100%;
+  font-size: 130%;
   font-weight: bold;
   margin-top: 5%;
 }
@@ -358,7 +358,7 @@
     width: 100%;
   }
   .Scientific button > img {
-    height: 60%;
+    height: 40%;
     width: 15%;
   }
   .History {
@@ -374,6 +374,6 @@
     overflow: visible;
   }
   .History #history_list p {
-    font-size: 100%;
+    font-size: 50%;
   }
 }/*# sourceMappingURL=style.css.map */
