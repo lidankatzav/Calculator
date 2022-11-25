@@ -209,7 +209,6 @@ function change_remote_mode(): void {
   } else {
     remote_mode = true;
   }
-  console.log(remote_mode);
 }
 
 function remote_eval(): void {
