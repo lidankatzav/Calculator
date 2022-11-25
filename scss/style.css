@@ -325,7 +325,7 @@
 .History #history_title {
   grid-area: "history_title";
   border-bottom: 1px solid black;
-  width: 250px;
+  width: 270px;
   align-items: center;
   text-align: center;
 }
