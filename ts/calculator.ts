@@ -223,7 +223,7 @@ function remote_eval(): void {
     "https://api.mathjs.org/v4/?expr=" +
     encodeURIComponent(join_lst(calculation_lst));
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 10);
+  const timeoutId = setTimeout(() => controller.abort(), 2000);
   fetch(URL, { signal: controller.signal })
     .then(function (response) {
       return response.json();
@@ -238,8 +238,6 @@ function remote_eval(): void {
     .catch((err) => {
       if (err.name === "AbortError") {
         alert("2 seconds passed\nSwitch to local mode!");
-      } else {
-        alert(err.msg);
       }
     })
     .finally(() => {
