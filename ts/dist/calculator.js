@@ -21,9 +21,9 @@ function active_calculator_button(value) {
     }
     else if (value === "=") {
         if (calculation_lst.length >= 3) {
+            vaild_eval();
             if (remote_mode) {
                 remote_eval();
-                result = calculation_lst[0];
             }
             else {
                 calculate();
@@ -56,13 +56,14 @@ function active_calculator_button(value) {
 function join_lst(lst) {
     // Function that takes an array and join it into a string representation.
     var output = "";
-    for (var _i = 0, lst_1 = lst; _i < lst_1.length; _i++) {
-        var val = lst_1[_i];
+    for (var _i = 0, calculation_lst_1 = calculation_lst; _i < calculation_lst_1.length; _i++) {
+        var val = calculation_lst_1[_i];
         output += val + " ";
     }
     return output;
 }
 function add_digits(value) {
+    //
     var last_idx = calculation_lst.length - 1;
     if (calculation_lst.length === 0 ||
         operators.includes(calculation_lst[last_idx]) ||
@@ -234,4 +235,11 @@ function remote_eval() {
     })["finally"](function () {
         clearTimeout(timeoutId);
     });
+}
+function vaild_eval() {
+    for (var i = 0; i < calculation_lst.length; i++) {
+        if (calculation_lst[i].includes("/") && calculation_lst[i].length > 1) {
+            calculation_lst[i] = "(" + calculation_lst[i] + ")";
+        }
+    }
 }

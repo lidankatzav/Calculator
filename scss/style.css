@@ -325,7 +325,7 @@
 .History #history_title {
   grid-area: "history_title";
   border-bottom: 1px solid black;
-  width: 350px;
+  width: 320px;
   align-items: center;
   text-align: center;
 }
@@ -376,6 +376,6 @@
     overflow: visible;
   }
   .History #history_list p {
-    font-size: 100%;
+    font-size: 70%;
   }
-}/*# sourceMappingURL=style.css.map */
+} /*# sourceMappingURL=style.css.map */

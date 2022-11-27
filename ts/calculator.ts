@@ -21,9 +21,9 @@ function active_calculator_button(value: string): void {
     add_digits(value);
   } else if (value === "=") {
     if (calculation_lst.length >= 3) {
+      vaild_eval();
       if (remote_mode) {
         remote_eval();
-        result = calculation_lst[0];
       } else {
         calculate();
       }
@@ -50,13 +50,14 @@ function active_calculator_button(value: string): void {
 function join_lst(lst: string[]): string {
   // Function that takes an array and join it into a string representation.
   let output: string = "";
-  for (const val of lst) {
+  for (const val of calculation_lst) {
     output += val + " ";
   }
   return output;
 }
 
 function add_digits(value: string): void {
+  //
   const last_idx: number = calculation_lst.length - 1;
   if (
     calculation_lst.length === 0 ||
@@ -242,4 +243,12 @@ function remote_eval(): void {
     .finally(() => {
       clearTimeout(timeoutId);
     });
+}
+
+function vaild_eval(): void {
+  for (let i = 0; i < calculation_lst.length; i++) {
+    if (calculation_lst[i].includes("/") && calculation_lst[i].length > 1) {
+      calculation_lst[i] = "(" + calculation_lst[i] + ")";
+    }
+  }
 }
