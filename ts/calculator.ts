@@ -12,7 +12,7 @@ const scientific_operators: string[] = [
 ]; // Array that represents all the IDs of the scientific operators
 let calc_mode: string = "simple"; // String representation of the calculator calc_mode (simple / scientific)
 let history_lst: string[] = []; // History list of all the expressiones that calculated
-let remote_mode: boolean = false; //
+let remote_mode: boolean = false;
 
 function active_calculator_button(value: string): void {
   // Function that receives a representation of ID of a button
@@ -50,14 +50,13 @@ function active_calculator_button(value: string): void {
 function join_lst(lst: string[]): string {
   // Function that takes an array and join it into a string representation.
   let output: string = "";
-  for (const val of calculation_lst) {
+  for (const val of lst) {
     output += val + " ";
   }
   return output;
 }
 
 function add_digits(value: string): void {
-  //
   const last_idx: number = calculation_lst.length - 1;
   if (
     calculation_lst.length === 0 ||
@@ -90,10 +89,10 @@ function add_operator(value: string): void {
   } else if (calculation_lst.length === 0) {
     return;
   } else {
-    calculation_lst[calculation_lst.length - 1] = value;
+    calculation_lst[last_idx] = value;
   }
   if (calc_mode === "simple") {
-    if (calculation_lst.length > 3) {
+    if (calculation_lst.length >= 3) {
       const temp_result: string = String(
         eval(join_lst(calculation_lst.slice(0, -1)))
       );
