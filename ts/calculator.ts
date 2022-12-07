@@ -1,4 +1,4 @@
-// Global vars
+
 let calculation_lst: string[] = []; // Array that saves the expression that is going to be calculated in parts of a number and a operator
 let result: string = ""; // String representation of the result displayed to the screen
 const operators: string[] = ["+", "-", "/", "*"]; // Array that represents all the IDs of the simple operators
